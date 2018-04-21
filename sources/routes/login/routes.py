@@ -1,12 +1,11 @@
 from flask import Blueprint, render_template
 blueprint = Blueprint(
-    'login_blueprint',
+    'login',
     __name__,
-    url_prefix='/login',
+    url_prefix='/',
     template_folder='/templates',
     static_folder='/ressources'
 )
-
 @blueprint.route('/')
 def entry_point():
-    return 'Hello World2!'
+    return 'LOGIN LOGIN'

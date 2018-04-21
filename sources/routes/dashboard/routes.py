@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template
 blueprint = Blueprint(
-    'dashboard_blueprint',
+    'dashboard',
     __name__,
-    url_prefix='/',
-    template_folder='/templates',
-    static_folder='/ressources'
+    url_prefix='/dashboard',
+    template_folder='/templates/',
+    static_folder='static'
 )
 
 @blueprint.route('/')
 def entry_point():
-    return 'Hello World!'
+    return render_template("dashboard/index.html")
