@@ -1,0 +1,43 @@
+/* ---- grid ---- */
+
+.dashboard-content {
+    width: 90%;
+    height: 96%;
+}
+.dashboard-grid {
+  background: #CFEAFC;
+  width: 100%;
+    height: 100%;
+    max-width:100%;
+}
+.widget {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background: #70C5FF;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  margin:5px;
+}
+
+.widget.ui-sortable-placeholder {
+    background: #70C5FF !important;
+    visibility: visible !important;
+    border:0px;
+    opacity: 0.2;
+
+}
+
+.widget:hover {
+  border-color: #4BAFF2;
+  cursor: move;
+  opacity: .8;
+  -webkit-transition: opacity .6s;
+  -moz-transition: opacity .6s;
+  -o-transition: opacity .6s;
+  -ms-transition: opacity .6s
+}
+.widget.ui-draggable-dragging,
+.widget.is-positioning-post-drag {
+  background: #5C90B2;
+  z-index: 2;
+}

@@ -11,10 +11,9 @@
 <h1>Dashboard</h1>
 <div class="dashboard-content">
     <div class="dashboard-grid">
-        <div class="widget testWidget" style="height:600px;">A</div>
-        <div class="widget testWidget2">B</div>
-        <div class="widget testWidget2">C</div>
-        <div class="widget testWidget2">D</div>
+        {% for widget in widgets %}
+        <div class="widget" widget="{{ widget.name }}"></div>
+        {% endfor %}
     </div>
 </div>
 <script src ="{{ url_for('dashboard.static', filename='js/dashboard.js') }}"></script>

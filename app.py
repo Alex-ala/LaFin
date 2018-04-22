@@ -1,10 +1,16 @@
 #!/usr/bin/python
 # coding: utf-8
 from flask import Flask, url_for
+from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
+from models.dbconfig import connect_string
 import widgets
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = connect_string
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
 
 def register_blueprints(app):
     for module_name in ('routes.dashboard', 'routes.login'):
@@ -28,6 +34,7 @@ def site_map():
             url = url_for(rule.endpoint, **(rule.defaults or {}))
             links.append(url)
     return '<br>'.join(links)
+
 
 widgets.load(app)
 register_blueprints(app)

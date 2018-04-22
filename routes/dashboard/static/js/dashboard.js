@@ -3,4 +3,7 @@ $(function () {
       revert: true
     });
     $(".widget").resizable();
+    $(".widget").each(function(index){
+        $(this).load("/widgets/"+$(this).attr("widget"))
+    });
 });
