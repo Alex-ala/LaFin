@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session
-from models import database, widgets
+from models import database
 
 blueprint = Blueprint(
     'dashboard',
