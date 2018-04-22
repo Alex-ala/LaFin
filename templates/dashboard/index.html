@@ -2,35 +2,21 @@
 <html>
 <head>
     <title>LaFin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='css/jquery-ui.min.css') }}">
     <script src="{{ url_for('dashboard.static', filename='js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ url_for('dashboard.static', filename='js/jquery-ui.min.js') }}"></script>
-    <script src ="{{ url_for('dashboard.static', filename='js/packery.pkgd.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='css/jquery-ui.css') }}">
 </head>
 <body>
-<h1>Packery - Draggabilly</h1>
-
-<div class="grid">
-  <div class="grid-item grid-item--width2">hi</div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--width2 grid-item--height2"></div>
-  <div class="grid-item grid-item--width2"></div>
-  <div class="grid-item grid-item--width2"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--width2"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--width2 grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--width2"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
+<h1>Dashboard</h1>
+<div class="dashboard-content">
+    <div class="dashboard-grid">
+        <div class="widget testWidget" style="height:600px;">A</div>
+        <div class="widget testWidget2">B</div>
+        <div class="widget testWidget2">C</div>
+        <div class="widget testWidget2">D</div>
+    </div>
 </div>
-<script src ="{{ url_for('dashboard.static', filename='js/packery.js') }}"></script>
+<script src ="{{ url_for('dashboard.static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>
