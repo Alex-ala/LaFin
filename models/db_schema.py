@@ -1,9 +1,12 @@
 from app import db
 from sqlalchemy_utils import PasswordType
+import datetime
 
-class Session(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'),unique=True, nullable=False)
+class Sessions(db.Model):
+    session_token = db.Column(db.VARCHAR, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    csrf_token = db.Column(db.VARCHAR, nullable=True)
+    created = db.Column(db.DATETIME, nullable=False, default=datetime.datetime.now)
 
 
 class Users(db.Model):
@@ -33,5 +36,3 @@ class Widgets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.VARCHAR, nullable=False)
     options = db.Column(db.VARCHAR)
-
-
