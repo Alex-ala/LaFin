@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
-from models import database
+from models.database import session, dashboard
 
 blueprint = Blueprint(
     'dashboard',
@@ -13,8 +13,8 @@ blueprint = Blueprint(
 @blueprint.route('/')
 def entry_point():
     if 'lafin_session' in request.cookies:
-        session = database.get_session(request.cookies.get('lafin_session'))
-        userid = session.user_id
+        current_session = session.get_session(request.cookies.get('lafin_session'))
+        userid = current_session.user_id
     else:
-        return redirect('/login')
-    return render_template("dashboard/index.html", widgets=database.get_widgets(userid))
+        return redirect('/user/login')
+    return render_template("dashboard/index.html", widgets=dashboard.get_widgets(userid))

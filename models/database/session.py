@@ -1,21 +1,7 @@
-from models.db_schema import *
-from app import db
 import secrets
-import datetime
+from models.db_schema import *
 
-
-def get_widgets(userid):
-    return Dashboards.query.filter_by(user_id=userid).first().widgets
-
-
-def check_login(username, password):
-    user = Users.query.filter_by(name=username).first()
-    if user is None:
-        return False
-    if user.password == password:
-        return user.id
-    else:
-        return False
+encryption_keys = list()
 
 
 def start_session(userid):
@@ -25,6 +11,12 @@ def start_session(userid):
     db.session.add(session)
     db.session.commit()
     return session_token
+
+
+def stop_session(token):
+    session = Sessions.query.filter_by(session_token=token).first()
+    db.session.delete(session)
+    db.session.commit()
 
 
 def clear_sessions():
@@ -38,3 +30,9 @@ def clear_sessions():
 
 def get_session(token):
     return Sessions.query.filter_by(session_token=token).first()
+
+
+def update_session(token):
+    session = Sessions.query.filter_by(session_token=token).first()
+    session.created = datetime.datetime.now()
+    clear_sessions()
