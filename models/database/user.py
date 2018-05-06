@@ -1,4 +1,3 @@
-from models.db_schema import *
 from models.database.session import *
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
@@ -14,8 +13,7 @@ def check_login(username, password):
     if user.password == password:
         key = get_encryption_key(password, user.salt)
         token = start_session(user.id)
-        encryption_keys.append((key, token))
-        return token
+        return (token, key)
     else:
         return False
 
@@ -23,8 +21,6 @@ def check_login(username, password):
 def logout(session_token):
     if Sessions.query.filter_by(session_token=session_token).first() is None:
         return
-    key = [item for item in encryption_keys if item[1] == session_token]
-    encryption_keys.remove(key[0])
     stop_session(session_token)
 
 
@@ -37,10 +33,20 @@ def get_encryption_key(password, salt):
         backend=default_backend()
     )
     key = base64.urlsafe_b64encode(kdf.derive(password.encode('utf-8')))
-    return Fernet(key)
+    return key
 
 
 def add_user(name, email, password):
     user = Users(name=name, email=email, password=password, salt=secrets.token_bytes(32))
     db.session.add(user)
     db.session.commit()
+
+
+def encrypt(raw_data, key):
+    f =  Fernet(key)
+    return f.encrypt(raw_data)
+
+
+def decrypt(raw_data, key):
+    f = Fernet(key)
+    return f.decrypt(raw_data)

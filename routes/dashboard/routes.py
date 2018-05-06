@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect
 from models.database import session, dashboard
+from models.decorators import check_session
 
 blueprint = Blueprint(
     'dashboard',
@@ -11,10 +12,6 @@ blueprint = Blueprint(
 
 
 @blueprint.route('/')
-def entry_point():
-    if 'lafin_session' in request.cookies:
-        current_session = session.get_session(request.cookies.get('lafin_session'))
-        userid = current_session.user_id
-    else:
-        return redirect('/user/login')
+@check_session
+def entry_point(userid, key):
     return render_template("dashboard/index.html", widgets=dashboard.get_widgets(userid))

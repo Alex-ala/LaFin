@@ -1,8 +1,6 @@
 import secrets
 from models.db_schema import *
 
-encryption_keys = list()
-
 
 def start_session(userid):
     session_token = secrets.token_hex(64)
@@ -22,7 +20,7 @@ def stop_session(token):
 def clear_sessions():
     sessions = Sessions.query.all()
     for session in sessions:
-        expire = session.created + datetime.timedelta(minutes=30)
+        expire = session.created + datetime.timedelta(minutes=15)
         if expire < datetime.datetime.now():
             db.session.delete(session)
     db.session.commit()

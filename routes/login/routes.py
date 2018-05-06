@@ -21,12 +21,14 @@ def login():
 def check_login():
     username = request.form.get('username', None)
     password = request.form.get('password', None)
-    token = user.check_login(username, password)
-    if token is None:
+    tokenkey = user.check_login(username, password)
+    if tokenkey is None:
         return render_template("login/login.html", login_error=True)
     else:
         response = make_response(redirect("dashboard/"))
-        response.set_cookie('lafin_session', token)
+        print(tokenkey)
+        response.set_cookie('lafin_session', tokenkey[0], max_age=900)
+        response.set_cookie('lafin_key', tokenkey[1], max_age=900)
         return response
 
 
@@ -36,6 +38,7 @@ def logout():
     if token is None:
         return redirect('/user/login')
     response = make_response(redirect('/user/login'))
-    response.set_cookie('lafin_session', '', expires=0)
+    response.set_cookie('lafin_session', '', max_age=0)
+    response.set_cookie('lafin_key', '', max_age=0)
     user.logout(token)
     return response
