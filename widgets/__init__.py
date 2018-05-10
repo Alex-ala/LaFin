@@ -11,8 +11,8 @@ def load(app):
             module_name,
             __name__,
             url_prefix='/widgets/'+module_name,
-            template_folder='templates',
-            static_folder='ressources'
+            template_folder='../widgets/'+module_name+'/templates',
+            static_folder='../widgets/'+module_name+'/static'
         )
         add_widget(module_name, blueprint)
         import_module('widgets.'+module_name+"."+module_name)

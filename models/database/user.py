@@ -43,7 +43,7 @@ def add_user(name, email, password):
 
 
 def encrypt(raw_data, key):
-    f =  Fernet(key)
+    f = Fernet(key)
     return f.encrypt(raw_data)
 
 

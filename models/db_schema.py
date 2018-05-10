@@ -35,4 +35,6 @@ class Dashboards(db.Model):
 class Widgets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.VARCHAR, nullable=False)
+    type = db.Column(db.VARCHAR, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     options = db.Column(db.VARCHAR)
