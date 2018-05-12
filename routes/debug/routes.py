@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from models.database.user import encrypt, decrypt
+from models.database.user import encrypt, decrypt, add_user
 from app import app
 
 blueprint = Blueprint(
@@ -21,3 +21,8 @@ def test_decryption():
     data = request.args.get('data').encode('utf-8')
     key = request.cookies.get('lafin_key')
     return decrypt(data, key)
+
+@blueprint.route('/createAccount')
+def create_account():
+    add_user('a@b.c', 'a@b.c', 'a@b.c')
+    return "User a@b.c created"

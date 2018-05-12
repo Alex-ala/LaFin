@@ -28,7 +28,7 @@ class Dashboards(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.VARCHAR, nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable=False)
-    widgets =  db.relationship("Widgets", secondary=r_widgets, lazy='subquery',
+    widgets = db.relationship("Widgets", secondary=r_widgets, lazy='subquery',
                                    backref=db.backref('dashboard_id', lazy=True))
 
 
@@ -37,4 +37,33 @@ class Widgets(db.Model):
     name = db.Column(db.VARCHAR, nullable=False)
     type = db.Column(db.VARCHAR, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    options = db.Column(db.VARCHAR)
+    options = db.Column(db.VARCHAR(10000))
+
+
+class Accounts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable=False)
+    currency_id = db.Column(db.Integer, db.ForeignKey('currencies.id'), nullable=False)
+    account_number = db.Column(db.VARBINARY(250), nullable=False)
+    BIC = db.Column(db.VARBINARY(64), nullable=True)
+    name = db.Column(db.VARBINARY(256), nullable=False)
+    IBAN = db.Column(db.VARBINARY(128), nullable=True)
+
+
+class Currencies(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.VARCHAR(50), nullable=False)
+    short = db.Column(db.VARCHAR(3), nullable=False)
+    accuracy = db.Column(db.Integer, nullable=False)
+
+
+class Transactions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date_valuta = db.Column(db.DATE, nullable=False)
+    date_created = db.Column(db.DATETIME, nullable=False)
+    description = db.Column(db.VARBINARY(1024), nullable=True)
+    account_origin_id = db.Column(db.Integer, db.ForeignKey('accounts.id'), nullable=False)
+    account_target_id = db.Column(db.Integer, db.ForeignKey('accounts.id'), nullable=False)
+    amount = db.Column(db.VARBINARY(128),nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=True)
+    reoccuring_template = db.Column(db.Integer, db.ForeignKey('reoccuring_transactions.id'), nullable=True)
