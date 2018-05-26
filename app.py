@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 
 def register_blueprints(app):
-    for module_name in ('routes.dashboard', 'routes.login'):
+    for module_name in ('routes.dashboard', 'routes.login', 'routes.debug'):
         module = import_module('{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 

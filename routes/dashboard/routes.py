@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, session
-from models import database
+from flask import Blueprint, render_template, request, redirect
+from models.database import session, dashboard
+from models.decorators import check_session
 
 blueprint = Blueprint(
     'dashboard',
@@ -9,7 +10,8 @@ blueprint = Blueprint(
     static_folder='static'
 )
 
+
 @blueprint.route('/')
-def entry_point():
-    userid = 1
-    return render_template("dashboard/index.html", widgets=database.get_widgets(userid))
+@check_session
+def entry_point(userid, key):
+    return render_template("dashboard/index.html", widgets=dashboard.get_widgets(userid))

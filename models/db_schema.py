@@ -2,6 +2,7 @@ from app import db
 from sqlalchemy_utils import PasswordType
 import datetime
 
+
 class Sessions(db.Model):
     session_token = db.Column(db.VARCHAR, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -31,8 +32,9 @@ class Dashboards(db.Model):
                                    backref=db.backref('dashboard_id', lazy=True))
 
 
-
 class Widgets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.VARCHAR, nullable=False)
+    type = db.Column(db.VARCHAR, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     options = db.Column(db.VARCHAR)
