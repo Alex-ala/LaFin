@@ -13,7 +13,7 @@ blueprint = Blueprint(
 
 @blueprint.route('/', methods=['GET'])
 def login():
-    database.clearSessions()
+    database.clear_sessions()
     return render_template("login/login.html")
 
 
@@ -21,9 +21,9 @@ def login():
 def checkLogin():
     username = request.form.get('username', None)
     password = request.form.get('password', None)
-    validated = database.checkLogin(username, password)
+    validated = database.check_login(username, password)
     if validated:
-        token = database.startSession(validated)
+        token = database.start_session(validated)
         response = make_response(redirect("dashboard/"))
         response.set_cookie('session', token)
         return redirect("dashboard/")

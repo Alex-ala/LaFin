@@ -12,4 +12,4 @@ blueprint = Blueprint(
 @blueprint.route('/')
 def entry_point():
     userid = 1
-    return render_template("dashboard/index.html", widgets=database.getWidgets(userid))
+    return render_template("dashboard/index.html", widgets=database.get_widgets(userid))

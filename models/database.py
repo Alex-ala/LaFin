@@ -3,11 +3,11 @@ from app import db
 import secrets
 import datetime
 
-def getWidgets(userid):
+def get_widgets(userid):
     return Dashboards.query.filter_by(user_id=userid).first().widgets
 
 
-def checkLogin(username, password):
+def check_login(username, password):
     user = Users.query.filter_by(name=username).first()
     if user is None:
         return False
@@ -17,7 +17,7 @@ def checkLogin(username, password):
         return False
 
 
-def startSession(userid):
+def start_session(userid):
     session_token = secrets.token_hex(64)
     csrf_token = secrets.token_hex(64)
     session = Sessions(session_token=session_token, csrf_token=csrf_token, user_id=userid)
@@ -26,7 +26,7 @@ def startSession(userid):
     return session_token
 
 
-def clearSessions():
+def clear_sessions():
     sessions = Sessions.query.all()
     for session in sessions:
         expire = session.created + datetime.timedelta(minutes=30)
