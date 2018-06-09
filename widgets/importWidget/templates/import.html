@@ -5,6 +5,13 @@
     <title>Import</title>
 </head>
 <body>
-    <div>SHIIIIT IM A WIDGET</div>
+<div>
+    <form action="/widgets/importWidget/import" method="POST" enctype="multipart/form-data">
+        CSV:<input type="file" name="csv_file" accept="text/csv" width="100px"/><br/>
+        Char: <input type="text" maxlength="1" name="char" width="20px"/><br/>
+        Account: <input type="text" maxlength="32" name="account_id"/><br/>
+        <input type="submit" value="Import"/>
+    </form>
+</div>
 </body>
 </html>

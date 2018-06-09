@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Import</title>
+</head>
+<body>
+<div>
+    {% for id, account in balances.items() %}
+        <div>{{ id }}: {{ account.currency }}&nbsp;{{ '%.2f' % account.value }}</div>
+    {% endfor %}
+</div>
+</body>
+</html>

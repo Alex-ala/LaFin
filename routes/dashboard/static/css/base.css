@@ -17,6 +17,9 @@
   background: #70C5FF;
   border: 2px solid hsla(0, 0%, 0%, 0.5);
   margin:5px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
 }
 
 .widget.ui-sortable-placeholder {

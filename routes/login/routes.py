@@ -22,7 +22,7 @@ def check_login():
     username = request.form.get('username', None)
     password = request.form.get('password', None)
     tokenkey = user.check_login(username, password)
-    if tokenkey is None:
+    if tokenkey is None or tokenkey is False:
         return render_template("login/login.html", login_error=True)
     else:
         response = make_response(redirect("dashboard/"))
