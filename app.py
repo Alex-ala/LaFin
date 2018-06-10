@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = connect_string
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
 def register_blueprints(app):
     for module_name in ('routes.dashboard', 'routes.login', 'routes.debug'):
         module = import_module('{}.routes'.format(module_name))
