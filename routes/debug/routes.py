@@ -1,6 +1,5 @@
 from flask import request, Blueprint
 from models.database.user import encrypt, decrypt, add_user
-from app import app
 
 blueprint = Blueprint(
     'debug',
