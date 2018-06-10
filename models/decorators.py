@@ -1,7 +1,9 @@
 from models.database.session import get_session, update_session
 from flask import request, redirect
+from functools import wraps
 
 def check_session(f):
+    @wraps(f)
     def check(*args, **kws):
         cookies = request.cookies
         if not ('lafin_session' in cookies and 'lafin_key' in cookies):
@@ -12,7 +14,5 @@ def check_session(f):
         update_session(cookies.get('lafin_session'))
         userid = current_session.user_id
         key = cookies.get('lafin_key')
-        print(userid)
-        print(key)
         return f(userid, key)
     return check

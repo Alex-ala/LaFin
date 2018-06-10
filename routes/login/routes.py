@@ -26,7 +26,6 @@ def check_login():
         return render_template("login/login.html", login_error=True)
     else:
         response = make_response(redirect("dashboard/"))
-        print(tokenkey)
         response.set_cookie('lafin_session', tokenkey[0], max_age=900)
         response.set_cookie('lafin_key', tokenkey[1], max_age=900)
         return response
