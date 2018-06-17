@@ -1,5 +1,6 @@
 from models.database.session import get_session, update_session
-from flask import request, redirect
+from models.database.user import check_account_permissions
+from flask import request, redirect, abort
 from functools import wraps
 
 def check_session(f):
@@ -14,5 +15,11 @@ def check_session(f):
         update_session(cookies.get('lafin_session'))
         userid = current_session.user_id
         key = cookies.get('lafin_key')
-        return f(userid, key)
+        if 'account_id' in kws:
+            if check_account_permissions(userid, kws["account_id"]):
+                return f(userid,key,kws["account_id"])
+            else:
+                return abort(403)
+        else:
+            return f(userid, key)
     return check

@@ -50,3 +50,10 @@ def encrypt(raw_data, key):
 def decrypt(raw_data, key):
     f = Fernet(key)
     return f.decrypt(raw_data)
+
+
+def check_account_permissions(user_id, account_id):
+    if Accounts.query.filter_by(id=account_id, user_id=user_id).first() is None:
+        return False
+    else:
+        return True

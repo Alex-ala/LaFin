@@ -16,6 +16,14 @@ blueprint = Blueprint(
 def entry_point(userid, key):
     return render_template("dashboard/index.html", widgets=dashboard.get_widgets(userid))
 
+
+@blueprint.route('/<account_id>')
+@check_session
+def account_dashboard(userid, key, account_id=None):
+    return render_template("dashboard/index.html", widgets=dashboard.get_widgets(userid))
+
+
+
 #TODO: Route for each account (/dashboard/1) -> Show transactions only for this account
 #TODO: ImportWidget uses dashboards accountid if none given
 #TODO: WidgetSettings for TransactionsWidget
